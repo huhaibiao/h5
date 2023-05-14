@@ -37,7 +37,7 @@ if (
 
   const { arr, x } = generateArr(
     { width: areaWidth, height: areaHeight, targetWidth: width },
-    btnType.slice(0, 2 + curBlockData.value.level)
+    btnType.slice(0, 1 + curBlockData.value.level)
   )
   curBlockData.value.arr.length = 0
   curBlockData.value.arr.push(...arr)
@@ -169,7 +169,7 @@ const refresh = (param?: string) => {
       height: areaHeight,
       targetWidth: width
     },
-    btnType.slice(0, 2 + curBlockData.value.level)
+    btnType.slice(0, 1 + curBlockData.value.level)
   )
   xW.value = x * width
   curBlockData.value.arr.length = 0
@@ -201,7 +201,7 @@ onMounted(() => {
 const addImagery = (index: number) => {
   if (curLevel.value === index) return
   curLevel.value = index
-  curBlockData.value.level = index + 1
+  curBlockData.value = blockData[index]
   controlShow.value = false
   refresh()
 }
