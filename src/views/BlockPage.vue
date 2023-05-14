@@ -57,7 +57,7 @@ myWorker.onmessage = e => {
 
 const blockPageContent = ref<HTMLDivElement | null>(null)
 
-const passStatus = ref(false)
+const passStatus = ref(true)
 
 let enableClick = true
 const btnClick = (x: number, y: number) => {
@@ -160,8 +160,8 @@ const refresh = (param?: string) => {
   curBlockData.value.allCount++
   curBlockData.value.timeStart = new Date().getTime()
   if (param === 'next') {
-    nextBlockData()
     curLevel.value++
+    nextBlockData()
   }
   const { arr: newArr, x } = generateArr(
     {

@@ -12,6 +12,10 @@ export const blockData = reactive<any>([
     arr: []
   }
 ])
+
+export const curLevel = ref(0)
+export const curBlockData = ref(blockData[curLevel.value])
+
 export const nextBlockData = () => {
   blockData.push({
     timeStart: new Date().getTime(),
@@ -21,8 +25,8 @@ export const nextBlockData = () => {
     level: curLevel.value + 1,
     arr: []
   })
+  curBlockData.value = blockData[curLevel.value]
 }
-export const curLevel = ref(0)
 
 export const saveLocalData = () => {
   localStorage.setItem('blockData', JSON.stringify(blockData))
@@ -44,10 +48,6 @@ if (localData.blockData) {
   blockData.push(...localData.blockData)
   curLevel.value = localData.curLevel
 }
-
-export const curBlockData = computed(() => {
-  return blockData[curLevel.value]
-})
 
 type btnT = {
   type: '' | 'primary' | 'success' | 'info' | 'warning' | 'danger'
