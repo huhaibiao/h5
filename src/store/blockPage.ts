@@ -41,12 +41,12 @@ const getLocalData = () => {
 }
 
 const localData = getLocalData()
-console.log('🚀 ~ file: blockPage.ts:40 ~ localData:', localData)
 
 if (localData.blockData) {
   blockData.length = 0
   blockData.push(...localData.blockData)
   curLevel.value = localData.curLevel
+  curBlockData.value = blockData[curLevel.value]
 }
 
 type btnT = {
