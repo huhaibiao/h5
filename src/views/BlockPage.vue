@@ -24,23 +24,30 @@ const width = 40,
 
 curBlockData.value.allCount++
 
+const xW = ref(curBlockData.value.arr.length * 40)
+if (localStorage.getItem('xW')) {
+  xW.value = +localStorage.getItem('xW')!
+}
+
 if (
   curBlockData.value.arr.length === 0 ||
   window.innerWidth !== JSON.parse(localStorage.getItem('innerWidth') || '0')
 ) {
   localStorage.setItem('innerWidth', JSON.stringify(window.innerWidth))
 
-  const { arr } = generateArr(
+  const { arr, x } = generateArr(
     { width: areaWidth, height: areaHeight, targetWidth: width },
     btnType.slice(0, 2 + curBlockData.value.level)
   )
   curBlockData.value.arr.length = 0
   curBlockData.value.arr.push(...arr)
+
+  xW.value = x * width
+  localStorage.setItem('xW', JSON.stringify(xW.value))
   console.time('saveTime')
   saveLocalData()
   console.timeEnd('saveTime')
 }
-const xW = ref(curBlockData.value.arr.length * 40)
 
 myWorker.onmessage = e => {
   console.timeEnd('worker communication')
