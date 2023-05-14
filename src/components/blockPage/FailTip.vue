@@ -20,7 +20,6 @@ const exit = () => {
     width="60%"
     :show-close="false"
     center
-    top="50%"
     @close="emit('close')"
   >
     <span> 此局以无法继续了，重开？ </span>
