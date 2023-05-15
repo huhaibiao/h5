@@ -6,8 +6,15 @@
 
 body{
   /* transform: rotateX(180deg); */
+  height: 100vh;
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
+  background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
+}
+
+.box2 {
+  margin: 20px 0;
+  text-align: center;
 }

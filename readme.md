@@ -10,6 +10,10 @@ vite + vue3 + ts + vue-router + pinia
 
 # h5项目仓库
 
+## 数字方块消消预览地址：
+1. 小服务器地址：http://18.216.251.165:8090/
+2. vercel地址：https://h5-lilac.vercel.app/
+
 # 分支说明：
 - main:为正式分支，master会不定期合并dev分支
 - dev: 为开发分支，如果需要提交，请提交到该分支

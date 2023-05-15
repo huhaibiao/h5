@@ -5,18 +5,19 @@
 <script setup lang="ts">
 import BlockPageHeader from '../components/blockPage/BlockPageHeader.vue'
 import FailTip from '../components/blockPage/FailTip.vue'
+import PassComponent from '../components/blockPage/PassComponent.vue'
 import {
   curBlockData,
   curLevel,
   generateArr,
   saveLocalData,
   nextBlockData,
-  blockData
+  blockData,
+  btnType
 } from '../store/blockPage'
 import { myWorker } from '../worker'
 
 import { isMobile, touchSwiper } from './../utils/index'
-const btnType: any = ['', 'primary', 'success', 'info', 'warning', 'danger']
 
 const width = 40,
   areaWidth = window.innerWidth - width,
@@ -57,7 +58,7 @@ myWorker.onmessage = e => {
 
 const blockPageContent = ref<HTMLDivElement | null>(null)
 
-const passStatus = ref(false)
+const passStatus = ref(true)
 
 let enableClick = true
 const btnClick = (x: number, y: number) => {
@@ -157,13 +158,16 @@ const btnClick = (x: number, y: number) => {
 
 /** 通过/刷新 */
 const refresh = (param?: string) => {
+  const width = 40,
+    areaWidth = window.innerWidth - width,
+    areaHeight = window.innerHeight - width * 2
+
   curBlockData.value.allCount++
   curBlockData.value.timeStart = new Date().getTime()
   if (param === 'next') {
-    curLevel.value++
     nextBlockData()
   }
-  const { arr: newArr, x } = generateArr(
+  const { arr: newArr } = generateArr(
     {
       width: areaWidth,
       height: areaHeight,
@@ -171,7 +175,6 @@ const refresh = (param?: string) => {
     },
     btnType.slice(0, 1 + curBlockData.value.level)
   )
-  xW.value = x * width
   curBlockData.value.arr.length = 0
   curBlockData.value.arr.push(...newArr)
   console.time('worker communication')
@@ -188,8 +191,8 @@ const refresh = (param?: string) => {
 
 const failTipShow = ref(false)
 const confirm = () => {
-  failTipShow.value = false
   refresh()
+  failTipShow.value = false
 }
 const mobile = ref(isMobile())
 
@@ -231,21 +234,11 @@ const addImagery = (index: number) => {
       </div>
     </div>
   </div>
-  <div class="congratulation" v-else>
-    <div class="box2">
-      🎉成功通过第{{ curBlockData.level }}关, 此次耗时{{
-        curBlockData.timeCost.toFixed(2)
-      }}s
-    </div>
-    <div class="box2">继续尝试第{{ curBlockData.level }}关</div>
-    <el-button type="primary" round size="large" @click="refresh()"
-      >刷新</el-button
-    >
-    <div class="box2">或者进入下一关</div>
-    <el-button type="primary" round size="large" @click="refresh('next')"
-      >下一关</el-button
-    >
-  </div>
+  <pass-component
+    v-else
+    @close="passStatus = false"
+    @refresh="refresh"
+  ></pass-component>
 
   <fail-tip
     @close="failTipShow = false"
@@ -304,20 +297,6 @@ const addImagery = (index: number) => {
 div.selected {
   border: 1px solid rgba(0, 255, 21, 0.847);
   color: rgb(177, 19, 51);
-}
-.congratulation {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  font-size: 22px;
-  font-weight: 500;
-  color: #333;
 }
 .top-right {
   position: absolute;

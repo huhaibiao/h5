@@ -17,16 +17,29 @@ export const curLevel = ref(0)
 export const curBlockData = ref(blockData[curLevel.value])
 
 export const nextBlockData = () => {
-  blockData.push({
-    timeStart: new Date().getTime(),
-    passCount: 0,
-    timeCost: 0,
-    allCount: 1,
-    level: curLevel.value + 1,
-    arr: []
-  })
+  curLevel.value++
+  if (!blockData[curLevel.value]) {
+    blockData.push({
+      timeStart: new Date().getTime(),
+      passCount: 0,
+      timeCost: 0,
+      allCount: 1,
+      level: curLevel.value + 1,
+      arr: []
+    })
+  }
   curBlockData.value = blockData[curLevel.value]
 }
+
+/**方块类型数据 */
+export const btnType: any = [
+  '',
+  'primary',
+  'success',
+  'info',
+  'warning',
+  'danger'
+]
 
 export const saveLocalData = () => {
   localStorage.setItem('blockData', JSON.stringify(blockData))
