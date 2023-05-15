@@ -17,6 +17,7 @@ declare module '@vue/runtime-core' {
     FailTip: typeof import('./components/blockPage/FailTip.vue')['default']
     IEpEdit: typeof import('~icons/ep/edit')['default']
     IEpShare: typeof import('~icons/ep/share')['default']
+    PassComponent: typeof import('./components/blockPage/PassComponent.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
