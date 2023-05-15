@@ -58,7 +58,7 @@ myWorker.onmessage = e => {
 
 const blockPageContent = ref<HTMLDivElement | null>(null)
 
-const passStatus = ref(true)
+const passStatus = ref(false)
 
 let enableClick = true
 const btnClick = (x: number, y: number) => {
