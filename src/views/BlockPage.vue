@@ -114,7 +114,7 @@ const btnClick = (x: number, y: number) => {
             setTimeout(() => {
               curBlockData.value.arr.splice(i, 1)
               enableClick = true
-            }, 200)
+            }, 10)
           }
         }
       }

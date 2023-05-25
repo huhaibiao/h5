@@ -1,7 +1,20 @@
 <!--
- * @Author: huhaibiao huhaibiao@do-global.com
+ * @Author: huhaibiao 
  * @Date: 2023-04-21 22:11:20
 -->
+
+# 其他项目推荐
+
+## ai chat
+体验地址：（欢迎友好提问哈，小服务器希望大家友好体验一下）
+http://18.216.251.165/ai-chat
+- 项目界面：
+![ai chat界面](./docs/01.jpeg)
+目前 账号：huhaibiao 密码是：1
+- 开源代码：
+前端：https://github.com/huhaibiao/aichat
+后端：https://github.com/huhaibiao/openai-api
+
 vite + vue3 + ts + vue-router + pinia
 
 # 这个demo框架
